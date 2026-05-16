@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 400px;
+            background: yellowgreen;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 95%;
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .counter {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .warning {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>Message Box</h3>
+
+        <p>200 characters max</p>
+
+        <textarea id="message" placeholder="Type your message..."></textarea>
+
+        <div class="counter" id="counter">0/200 characters</div>
+
+        <div class="warning" id="warning"></div>
+    </div>
+
+    <script>
+        let textarea = document.getElementById("message");
+        let counter = document.getElementById("counter");
+        let warning = document.getElementById("warning");
+
+        let maxLength = 200;
+
+        textarea.addEventListener("input", function () {
+
+            // Prevent typing more than 200 characters
+            if (textarea.value.length > maxLength) {
+                textarea.value = textarea.value.substring(0, maxLength);
+                warning.textContent = "Character limit exceeded!";
+            } else {
+                warning.textContent = "";
+            }
+
+            let currentLength = textarea.value.length;
+            let remaining = maxLength - currentLength;
+
+            counter.textContent =
+                `${currentLength}/${maxLength} characters (${remaining} remaining)`;
+        });
+    </script>
+
+</body>
+
+</html>
